@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
 
-function App() {
+import { GlobalStyle, BREAKPOINT, SPACING } from './style';
+import Header from './components/Header';
+import Pages from './pages';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <GlobalStyle />
+      <Header />
+      <Pages />
+    </Container>
   );
 }
 
-export default App;
+const Container = styled.div`
+  max-width: 1200px;
+  padding: 0 ${SPACING};
+  margin: auto;
+
+  @media (min-width: ${BREAKPOINT.TABLET}) {
+    padding: 0 50px;
+  }
+
+  @media (min-width: ${BREAKPOINT.DESKTOP}) {
+    padding: 0 130px;
+  }
+`;
