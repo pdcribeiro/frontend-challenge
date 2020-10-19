@@ -1,18 +1,36 @@
-import React, { useRef, useState } from 'react';
+import { useLocation } from '@reach/router';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as DisabledMagnifierIcon } from '../assets/images/icon-magnifier-disabled.svg';
 import { ReactComponent as MagnifierIcon } from '../assets/images/icon-magnifier-grey.svg';
 import { COLOR, TEXT_COLOR, BORDER, SPACING, TRANSITION } from '../style';
 
-export default function SearchBar({ disabled, onSearch }) {
+export default function SearchBar({ disabled, onSearch, navigate }) {
   const [content, setContent] = useState('');
   const inputRef = useRef();
+  const location = useLocation();
+
+  useEffect(() => {
+    const userInput = new URLSearchParams(location.search).get('q');
+    if (userInput) {
+      onSearch(userInput, false);
+      setContent(userInput);
+    } else if (userInput === '') {
+      navigate('/');
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setContent('');
+    }
+  }, [location]);
 
   function handleKeyDown(event) {
     if (event.key === 'Enter' && content) {
       onSearch(content);
-      setContent('');
     }
   }
 

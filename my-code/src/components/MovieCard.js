@@ -10,7 +10,7 @@ import { COLOR, TEXT_COLOR, BORDER, TRANSITION } from '../style';
 const MAX_TITLE_LENGTH = 24;
 
 export default function MovieCard({ Title, Year, imdbID, Poster }) {
-  const { favorites } = useFavorites();
+  const favorites = useFavorites();
 
   function handleToggleFavorite(event) {
     favorites.toggle(imdbID);

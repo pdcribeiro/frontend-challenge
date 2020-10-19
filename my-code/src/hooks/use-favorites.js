@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
-import { context } from './use-context';
+import useContext from './use-context';
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState(
@@ -30,8 +30,4 @@ export function useFavorites() {
   return { toggle, includes };
 }
 
-function useFavoritesContext() {
-  return useContext(context);
-}
-
-export default useFavoritesContext;
+export default () => useContext().favorites;

@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import Search from './Search';
 import Detail from './Detail';
 import NotFound from './NotFound';
-import ContextProvider from '../hooks/use-context';
+import { ContextProvider } from '../hooks/use-context';
 
 export default function Pages() {
   return (
     <ContextProvider>
       <Router>
         <Main path="/">
-          <Search path="/" />
+          <Search path="/*" />
           <Detail path="movies/:movieId" />
           <NotFound default />
         </Main>

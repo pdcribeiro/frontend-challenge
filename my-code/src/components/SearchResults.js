@@ -3,34 +3,28 @@ import styled from 'styled-components';
 
 import MovieCard from './MovieCard';
 import SearchMessage from './SearchMessage';
-import EmptyStateImage from '../assets/images/illustration-empty-state.png';
-import EmptyStateImage2x from '../assets/images/illustration-empty-state@2x.png';
 import { BREAKPOINT } from '../style';
 
-export default function SearchResults({ searching, movies }) {
-  if (searching) {
+export default function SearchResults({ movies }) {
+  if (movies === undefined) {
     return <Searching />;
   }
 
-  if (movies === undefined) {
-    return <EmptyState />;
-  }
+  if (Array.isArray(movies)) {
+    if (movies.length > 0) {
+      return (
+        <Grid>
+          {movies.map(movie => (
+            <MovieCard key={movie.imdbID} {...movie} />
+          ))}
+        </Grid>
+      );
+    }
 
-  if (movies === null) {
-    return <Error />;
-  }
-
-  if (Array.isArray(movies) && movies.length === 0) {
     return <NoResults />;
   }
 
-  return (
-    <Grid>
-      {movies.map(movie => (
-        <MovieCard key={movie.imdbID} {...movie} />
-      ))}
-    </Grid>
-  );
+  return <Error />;
 }
 
 function Searching() {
@@ -38,20 +32,6 @@ function Searching() {
     <SearchMessage
       title="Searching..."
       subtitle="I promise it won't take long"
-    />
-  );
-}
-
-function EmptyState() {
-  return (
-    <SearchMessage
-      image={{
-        src: EmptyStateImage,
-        srcset: `${EmptyStateImage}, ${EmptyStateImage2x} 2x`,
-        alt: "Horse's head",
-      }}
-      title="Don't know what to search?"
-      subtitle="Here's an offer you can't refuse"
     />
   );
 }

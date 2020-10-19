@@ -1,10 +1,12 @@
-import React, { createContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 import { useFavorites } from './use-favorites';
 
-export default function ContextProvider({ children }) {
+export function ContextProvider({ children }) {
   const favorites = useFavorites();
   return <context.Provider value={{ favorites }}>{children}</context.Provider>;
 }
 
-export const context = createContext();
+const context = createContext();
+
+export default () => useContext(context);

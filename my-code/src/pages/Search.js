@@ -1,9 +1,14 @@
+import { Router } from '@reach/router';
 import React, { useState } from 'react';
 
-import { searchMovies } from '../api';
+import * as api from '../api';
+import LandingImage from '../assets/images/illustration-empty-state.png';
+import LandingImage2x from '../assets/images/illustration-empty-state@2x.png';
 import SearchBar from '../components/SearchBar';
+import SearchMessage from '../components/SearchMessage';
 import SearchResults from '../components/SearchResults';
 
+// eslint-disable-next-line
 const TEST_SEARCH_RESULTS = [
   {
     Title: 'No Country for Old Men',
@@ -87,22 +92,40 @@ const TEST_SEARCH_RESULTS = [
   },
 ];
 
-export default function Search() {
-  const [searching, setSearching] = useState(false);
-  const [movies, setMovies] = useState(TEST_SEARCH_RESULTS);
+export default function Search({ navigate }) {
+  // const [movies, setMovies] = useState(TEST_SEARCH_RESULTS);
+  const [movies, setMovies] = useState([]);
 
-  function handleSearch(userInput) {
-    searchMovies(userInput).then(movies => {
-      setMovies(movies);
-      setSearching(false);
-    });
-    setSearching(true);
+  function handleSearch(userInput, redirect = true) {
+    const query = encodeURIComponent(userInput).replace(/%20/g, '+');
+    setMovies(undefined);
+    api.searchMovies(query).then(setMovies);
+    if (redirect) {
+      navigate('/search?q=' + query);
+    }
   }
 
   return (
     <>
-      <SearchBar disabled={searching} onSearch={handleSearch} />
-      <SearchResults searching={searching} movies={movies} />
+      <SearchBar disabled={movies === undefined} onSearch={handleSearch} navigate={navigate} />
+      <Router>
+        <LandingMessage path="/" />
+        <SearchResults path="search" movies={movies} />
+      </Router>
     </>
+  );
+}
+
+function LandingMessage() {
+  return (
+    <SearchMessage
+      image={{
+        src: LandingImage,
+        srcset: `${LandingImage}, ${LandingImage2x} 2x`,
+        alt: "Horse's head",
+      }}
+      title="Don't know what to search?"
+      subtitle="Here's an offer you can't refuse"
+    />
   );
 }
