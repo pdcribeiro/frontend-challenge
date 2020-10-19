@@ -36,24 +36,6 @@ function Searching() {
   );
 }
 
-function Error() {
-  return (
-    <SearchMessage
-      title="An error ocurred"
-      subtitle="Ups... Sorry about that"
-    />
-  );
-}
-
-function NoResults() {
-  return (
-    <SearchMessage
-      title="No movies found"
-      subtitle="Guess you're out of luck"
-    />
-  );
-}
-
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -67,3 +49,21 @@ const Grid = styled.div`
     grid-template-columns: repeat(6, 1fr);
   }
 `;
+
+function NoResults() {
+  return (
+    <SearchMessage
+      title="No movies found"
+      subtitle="Guess you're out of luck"
+    />
+  );
+}
+
+function Error() {
+  return (
+    <SearchMessage
+      title="An error ocurred"
+      subtitle="Ups... Sorry about that"
+    />
+  );
+}

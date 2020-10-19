@@ -1,14 +1,18 @@
 import axios from 'axios';
 
-const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
-const API_PREFIX = 'http://www.omdbapi.com/?apikey=' + API_KEY;
+const axiosInstance = axios.create({
+  baseURL: 'http://www.omdbapi.com',
+  params: { apikey: process.env.REACT_APP_OMDB_API_KEY },
+});
 
 export function searchMovies(query) {
-  return axios
-    .get(`${API_PREFIX}&s=${query}&type=movie&page=2`)
-    .then(response => response.data.Search)
-    .catch(error => {
-      console.error(error);
-      return null;
-    });
+  return (
+    axiosInstance
+      .get('/', { params: { type: 'movie', s: query } })
+      .then(response => response.data.Search || [])
+      .catch(error => {
+        console.error(error);
+        return null;
+      })
+  );
 }

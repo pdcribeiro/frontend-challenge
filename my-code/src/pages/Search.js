@@ -99,7 +99,8 @@ export default function Search({ navigate }) {
   function handleSearch(userInput, redirect = true) {
     const query = encodeURIComponent(userInput).replace(/%20/g, '+');
     setMovies(undefined);
-    api.searchMovies(query).then(setMovies);
+    api.searchMovies(query).then(movies => {setMovies(movies); console.log(movies);});
+    // api.searchMovies(query).then(setMovies);
     if (redirect) {
       navigate('/search?q=' + query);
     }
