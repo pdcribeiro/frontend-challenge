@@ -26,6 +26,8 @@ export const TEXT_COLOR = {
   DISABLED: COLOR.MID_GREY, 
 };
 
+export const BORDER = '3px';
+
 export const SPACING = '25px';
 
 export const TRANSITION = '200ms';
@@ -45,29 +47,29 @@ export const GlobalStyle = createGlobalStyle`
   h1 {
     font-size: 80px;
     font-weight: 700;
-    letter-spacing: 0.8pt;
-    line-height: 88pt;
+    letter-spacing: 0.8px;
+    line-height: 88px;
   }
 
   h2 {
     font-size: 24px;
     font-weight: 500;
-    letter-spacing: 0.2pt;
-    line-height: 30pt;
+    letter-spacing: 0.2px;
+    line-height: 30px;
   }
 
   h3 {
     font-size: 20px;
     font-weight: 500;
-    letter-spacing: 0.2pt;
-    line-height: 28pt;
+    letter-spacing: 0.2px;
+    line-height: 28px;
   }
 
   h4, p {
     font-size: 16px;
     font-weight: 400;
-    letter-spacing: 0.16pt;
-    line-height: 24pt;
+    letter-spacing: 0.16px;
+    line-height: 24px;
   }
 
   h4 {

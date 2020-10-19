@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as DisabledMagnifierIcon } from '../assets/images/icon-magnifier-disabled.svg';
 import { ReactComponent as MagnifierIcon } from '../assets/images/icon-magnifier-grey.svg';
-import { COLOR, TEXT_COLOR, SPACING, TRANSITION } from '../style';
+import { COLOR, TEXT_COLOR, BORDER, SPACING, TRANSITION } from '../style';
 
 export default function SearchBar({ disabled, onSearch }) {
   const [content, setContent] = useState('');
@@ -35,7 +35,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   background-color: ${props => (props.disabled ? COLOR.GREY : COLOR.WHITE)};
-  border-radius: 5px;
+  border-radius: ${BORDER};
   padding-right: 16px;
   margin-bottom: ${SPACING};
   transition: ${TRANSITION};

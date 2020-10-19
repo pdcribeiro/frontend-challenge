@@ -16,5 +16,5 @@ export default function Header() {
 }
 
 const StyledHeader = styled.header`
-  padding: ${SPACING} 0;
+  margin-bottom: ${SPACING};
 `;

@@ -5,7 +5,7 @@ import MovieCard from './MovieCard';
 import SearchMessage from './SearchMessage';
 import EmptyStateImage from '../assets/images/illustration-empty-state.png';
 import EmptyStateImage2x from '../assets/images/illustration-empty-state@2x.png';
-import {  BREAKPOINT } from '../style';
+import { BREAKPOINT } from '../style';
 
 export default function SearchResults({ searching, movies }) {
   if (searching) {
@@ -27,7 +27,7 @@ export default function SearchResults({ searching, movies }) {
   return (
     <Grid>
       {movies.map(movie => (
-        <MovieCard key={movie.id} movie={movie} />
+        <MovieCard key={movie.imdbID} {...movie} />
       ))}
     </Grid>
   );
@@ -80,10 +80,10 @@ const Grid = styled.div`
   grid-gap: 20px;
 
   @media (min-width: ${BREAKPOINT.TABLET}) {
-  grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   @media (min-width: ${BREAKPOINT.DESKTOP}) {
-  grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 `;
