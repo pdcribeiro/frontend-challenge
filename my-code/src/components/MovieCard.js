@@ -22,7 +22,7 @@ export default function MovieCard({ Title, Year, imdbID, Poster }) {
       ? Title.substring(0, MAX_TITLE_LENGTH) + '...'
       : Title;
   return (
-    <Link to={'movies/' + imdbID}>
+    <Link to={'/movies/' + imdbID}>
       <Figure>
         <Image src={Poster} alt="Poster" />
         <OverlayContainer>
