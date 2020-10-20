@@ -24,7 +24,7 @@ export default function MovieCard({ Title, Year, imdbID, Poster }) {
   return (
     <Link to={'/movies/' + imdbID}>
       <Figure>
-        <Image src={Poster} alt="Poster" />
+        <Image src={Poster} alt="Movie poster" />
         <OverlayContainer>
           <Overlay />
           <FavoriteButton

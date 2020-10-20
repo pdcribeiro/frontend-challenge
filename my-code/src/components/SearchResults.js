@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import MovieCard from './MovieCard';
-import SearchMessage from './SearchMessage';
+import Message from './Message';
 import { BREAKPOINT } from '../style';
 
 export default function SearchResults({ movies }) {
@@ -29,7 +29,7 @@ export default function SearchResults({ movies }) {
 
 function Searching() {
   return (
-    <SearchMessage
+    <Message
       title="Searching..."
       subtitle="I promise it won't take long"
     />
@@ -52,7 +52,7 @@ const Grid = styled.div`
 
 function NoResults() {
   return (
-    <SearchMessage
+    <Message
       title="No movies found"
       subtitle="Guess you're out of luck"
     />
@@ -61,7 +61,7 @@ function NoResults() {
 
 function Error() {
   return (
-    <SearchMessage
+    <Message
       title="An error ocurred"
       subtitle="Ups... Sorry about that"
     />

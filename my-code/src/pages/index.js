@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Search from './Search';
 import Detail from './Detail';
-import NotFound from './NotFound';
+import Message from '../components/Message';
 import { ContextProvider } from '../hooks/use-context';
 
 export default function Pages() {
@@ -12,7 +12,8 @@ export default function Pages() {
     <ContextProvider>
       <Router>
         <Main path="/">
-          <Search path="/*" />
+          <Search path="/" />
+          <Search path="search" />
           <Detail path="movies/:movieId" />
           <NotFound default />
         </Main>
@@ -22,3 +23,12 @@ export default function Pages() {
 }
 
 const Main = styled.main``;
+
+function NotFound() {
+  return (
+    <Message
+      title="404 Not found"
+      subtitle="Ups... Sorry about that"
+    />
+  );
+}

@@ -16,7 +16,7 @@ export default function SearchBar({ disabled, onSearch, navigate }) {
     if (userInput) {
       onSearch(userInput, false);
       setContent(userInput);
-    } else if (userInput === '') {
+    } else if (location.pathname !== '/') {
       navigate('/');
     }
     // eslint-disable-next-line

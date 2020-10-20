@@ -5,7 +5,7 @@ import * as api from '../api';
 import LandingImage from '../assets/images/illustration-empty-state.png';
 import LandingImage2x from '../assets/images/illustration-empty-state@2x.png';
 import SearchBar from '../components/SearchBar';
-import SearchMessage from '../components/SearchMessage';
+import Message from '../components/Message';
 import SearchResults from '../components/SearchResults';
 
 // eslint-disable-next-line
@@ -99,8 +99,7 @@ export default function Search({ navigate }) {
   function handleSearch(userInput, redirect = true) {
     const query = encodeURIComponent(userInput).replace(/%20/g, '+');
     setMovies(undefined);
-    api.searchMovies(query).then(movies => {setMovies(movies); console.log(movies);});
-    // api.searchMovies(query).then(setMovies);
+    api.searchMovies(query).then(setMovies);
     if (redirect) {
       navigate('/search?q=' + query);
     }
@@ -109,7 +108,7 @@ export default function Search({ navigate }) {
   return (
     <>
       <SearchBar disabled={movies === undefined} onSearch={handleSearch} navigate={navigate} />
-      <Router>
+      <Router basepath="/" >
         <LandingMessage path="/" />
         <SearchResults path="search" movies={movies} />
       </Router>
@@ -119,7 +118,7 @@ export default function Search({ navigate }) {
 
 function LandingMessage() {
   return (
-    <SearchMessage
+    <Message
       image={{
         src: LandingImage,
         srcset: `${LandingImage}, ${LandingImage2x} 2x`,

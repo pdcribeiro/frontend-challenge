@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <StyledHeader>
       <Link to="/">
-        <Logo />
+        <Logo title="Logo" />
       </Link>
     </StyledHeader>
   );
