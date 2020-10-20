@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Header from './components/Header';
 import Pages from './pages';
-import { GlobalStyle, BREAKPOINT, SPACING } from './style';
+import { GlobalStyle, BREAKPOINT, SPACING } from './utils/style';
 
 export default function App() {
   return (

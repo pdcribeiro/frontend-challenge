@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
-import { SPACING } from '../style';
+import { SPACING } from '../utils/style';
 
 export default function Header() {
   return (

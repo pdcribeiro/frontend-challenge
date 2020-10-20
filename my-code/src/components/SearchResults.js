@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import MovieCard from './MovieCard';
 import Message from './Message';
-import { BREAKPOINT } from '../style';
+import { BREAKPOINT } from '../utils/style';
 
 export default function SearchResults({ movies }) {
   if (movies === undefined) {

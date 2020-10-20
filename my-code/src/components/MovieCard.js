@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ReactComponent as FullHeartIcon } from '../assets/images/icon-heart-full.svg';
 import { ReactComponent as HeartIcon } from '../assets/images/icon-heart-white.svg';
 import useFavorites from '../hooks/use-favorites';
-import { COLOR, TEXT_COLOR, BORDER, TRANSITION } from '../style';
+import { COLOR, TEXT_COLOR, BORDER, TRANSITION } from '../utils/style';
 
 const MAX_TITLE_LENGTH = 24;
 

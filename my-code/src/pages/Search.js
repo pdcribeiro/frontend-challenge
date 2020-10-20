@@ -1,7 +1,7 @@
 import { Router } from '@reach/router';
 import React, { useState } from 'react';
 
-import * as api from '../api';
+import * as api from '../utils/api';
 import LandingImage from '../assets/images/illustration-empty-state.png';
 import LandingImage2x from '../assets/images/illustration-empty-state@2x.png';
 import SearchBar from '../components/SearchBar';

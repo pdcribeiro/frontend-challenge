@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as DisabledMagnifierIcon } from '../assets/images/icon-magnifier-disabled.svg';
 import { ReactComponent as MagnifierIcon } from '../assets/images/icon-magnifier-grey.svg';
-import { COLOR, TEXT_COLOR, BORDER, SPACING, TRANSITION } from '../style';
+import { COLOR, TEXT_COLOR, BORDER, SPACING, TRANSITION } from '../utils/style';
 
 export default function SearchBar({ disabled, onSearch, navigate }) {
   const [content, setContent] = useState('');
@@ -38,6 +38,7 @@ export default function SearchBar({ disabled, onSearch, navigate }) {
     <Container disabled={disabled} onClick={() => inputRef.current.focus()}>
       {disabled ? <DisabledMagnifierIcon /> : <MagnifierIcon />}
       <Input
+        type="text"
         value={content}
         placeholder="Search movies..."
         disabled={disabled}
