@@ -1,12 +1,8 @@
-import { Router } from '@reach/router';
 import React, { useState } from 'react';
 
-import * as api from '../utils/api';
-import LandingImage from '../assets/images/illustration-empty-state.png';
-import LandingImage2x from '../assets/images/illustration-empty-state@2x.png';
 import SearchBar from '../components/SearchBar';
-import Message from '../components/Message';
 import SearchResults from '../components/SearchResults';
+import * as api from '../utils/api';
 
 // eslint-disable-next-line
 const TEST_SEARCH_RESULTS = [
@@ -92,40 +88,27 @@ const TEST_SEARCH_RESULTS = [
   },
 ];
 
-export default function Search({ navigate }) {
+export default function Search() {
   // const [movies, setMovies] = useState(TEST_SEARCH_RESULTS);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState();
 
-  function handleSearch(userInput, redirect = true) {
-    const query = encodeURIComponent(userInput).replace(/%20/g, '+');
+  async function search(query) {
+    setMovies(null);
+    return api.searchMovies(query).then(setMovies);
+  }
+
+  function clear() {
     setMovies(undefined);
-    api.searchMovies(query).then(setMovies);
-    if (redirect) {
-      navigate('/search?q=' + query);
-    }
   }
 
   return (
     <>
-      <SearchBar disabled={movies === undefined} onSearch={handleSearch} navigate={navigate} />
-      <Router basepath="/" >
-        <LandingMessage path="/" />
-        <SearchResults path="search" movies={movies} />
-      </Router>
+      <SearchBar
+        disabled={movies === null}
+        search={search}
+        clearMovies={clear}
+      />
+      <SearchResults movies={movies} />
     </>
-  );
-}
-
-function LandingMessage() {
-  return (
-    <Message
-      image={{
-        src: LandingImage,
-        srcset: `${LandingImage}, ${LandingImage2x} 2x`,
-        alt: "Horse's head",
-      }}
-      title="Don't know what to search?"
-      subtitle="Here's an offer you can't refuse"
-    />
   );
 }

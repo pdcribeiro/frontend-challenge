@@ -3,10 +3,16 @@ import styled from 'styled-components';
 
 import MovieCard from './MovieCard';
 import Message from './Message';
+import LandingImage from '../assets/images/illustration-empty-state.png';
+import LandingImage2x from '../assets/images/illustration-empty-state@2x.png';
 import { BREAKPOINT } from '../utils/style';
 
 export default function SearchResults({ movies }) {
   if (movies === undefined) {
+    return <LandingMessage />;
+  }
+
+  if (movies === null) {
     return <Searching />;
   }
 
@@ -25,6 +31,20 @@ export default function SearchResults({ movies }) {
   }
 
   return <Error />;
+}
+
+function LandingMessage() {
+  return (
+    <Message
+      image={{
+        src: LandingImage,
+        srcset: `${LandingImage}, ${LandingImage2x} 2x`,
+        alt: "Horse's head",
+      }}
+      title="Don't know what to search?"
+      subtitle="Here's an offer you can't refuse"
+    />
+  );
 }
 
 function Searching() {

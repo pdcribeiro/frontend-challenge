@@ -1,4 +1,4 @@
-import { useLocation } from '@reach/router';
+import { useLocation, useNavigate } from '@reach/router';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -6,31 +6,42 @@ import { ReactComponent as DisabledMagnifierIcon } from '../assets/images/icon-m
 import { ReactComponent as MagnifierIcon } from '../assets/images/icon-magnifier-grey.svg';
 import { COLOR, TEXT_COLOR, BORDER, SPACING, TRANSITION } from '../utils/style';
 
-export default function SearchBar({ disabled, onSearch, navigate }) {
+export default function SearchBar({ disabled, search, clearMovies }) {
   const [content, setContent] = useState('');
   const inputRef = useRef();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const userInput = new URLSearchParams(location.search).get('q');
+    const userInput = getUserInputFromURL();
     if (userInput) {
-      onSearch(userInput, false);
+      search(parseUserInput(userInput));
       setContent(userInput);
-    } else if (location.pathname !== '/') {
-      navigate('/');
     }
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      setContent('');
-    }
-  }, [location]);
+  function getUserInputFromURL() {
+    return new URLSearchParams(location.search).get('q');
+  }
 
-  function handleKeyDown(event) {
+  function parseUserInput(userInput) {
+    return encodeURIComponent(userInput).replace(/%20/g, '+');
+  }
+
+  useEffect(() => {
+    if (!getUserInputFromURL()) {
+      setContent('');
+      clearMovies();
+    }
+  // eslint-disable-next-line
+  }, [location.search]);
+
+  async function handleKeyDown(event) {
     if (event.key === 'Enter' && content) {
-      onSearch(content);
+      const query = parseUserInput(content);
+      await search(query);
+      navigate('/movies?q=' + query);
     }
   }
 

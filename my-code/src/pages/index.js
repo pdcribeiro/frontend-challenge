@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from '@reach/router';
+import { Redirect, Router } from '@reach/router';
 import styled from 'styled-components';
 
 import Search from './Search';
@@ -12,10 +12,10 @@ export default function Pages() {
     <ContextProvider>
       <Router>
         <Main path="/">
-          <Search path="/" />
-          <Search path="search" />
+          <Search path="movies" />
           <Detail path="movies/:movieId" />
           <NotFound default />
+          <Redirect from="/" to="movies" noThrow />
         </Main>
       </Router>
     </ContextProvider>

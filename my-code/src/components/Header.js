@@ -8,7 +8,7 @@ import { SPACING } from '../utils/style';
 export default function Header() {
   return (
     <StyledHeader>
-      <Link to="/">
+      <Link to="/movies">
         <Logo title="Logo" />
       </Link>
     </StyledHeader>
