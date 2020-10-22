@@ -4,7 +4,7 @@ import useContext from './use-context';
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState(
-    JSON.parse(window.localStorage.getItem('favorites')) || []
+    JSON.parse(window.localStorage.getItem('favorites')) ?? []
   );
 
   function toggle(imdbID) {
@@ -16,11 +16,13 @@ export function useFavorites() {
   }
 
   function toggleFavorite(favorites, imdbID) {
-    const index = favorites.findIndex(id => id === imdbID);
-    if (index === -1) {
-      return [...favorites, imdbID];
+    if (imdbID) {
+      const index = favorites.findIndex(id => id === imdbID);
+      if (index === -1) {
+        return [...favorites, imdbID];
+      }
+      return [...favorites.slice(0, index), ...favorites.slice(index + 1)];
     }
-    return [...favorites.slice(0, index), ...favorites.slice(index + 1)];
   }
 
   function includes(imdbID) {

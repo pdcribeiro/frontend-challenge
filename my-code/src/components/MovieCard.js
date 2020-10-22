@@ -18,25 +18,27 @@ export default function MovieCard({ Title, Year, imdbID, Poster }) {
   }
 
   const title =
-    Title.length > MAX_TITLE_LENGTH
+    Title?.length > MAX_TITLE_LENGTH
       ? Title.substring(0, MAX_TITLE_LENGTH) + '...'
       : Title;
   return (
     <Link to={'/movies/' + imdbID}>
       <Figure>
-        <Image src={Poster} alt="Movie poster" />
+        {Poster && <Image src={Poster} alt="Movie poster" />}
         <OverlayContainer>
           <Overlay />
           <FavoriteButton
-            enabled={favorites.includes(imdbID)}
+            style={{ opacity: favorites.includes(imdbID) && 1 }}
             onClick={handleToggleFavorite}
           >
             {favorites.includes(imdbID) ? <FullHeartIcon /> : <HeartIcon />}
           </FavoriteButton>
-          <Details>
-            <h3>{title}</h3>
-            {Year}
-          </Details>
+          {title && (
+            <Details>
+              <h3>{title}</h3>
+              {Year}
+            </Details>
+          )}
         </OverlayContainer>
       </Figure>
     </Link>
@@ -84,7 +86,6 @@ const Overlay = styled.div`
 
 const FavoriteButton = styled.button`
   background-color: transparent;
-  ${props => props.enabled && 'opacity: 1;'}
   border: none;
   padding: 0;
   top: 12px;

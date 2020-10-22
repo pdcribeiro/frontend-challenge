@@ -49,11 +49,12 @@ export default function SearchBar({ disabled, search, clearMovies }) {
     <Container disabled={disabled} onClick={() => inputRef.current.focus()}>
       {disabled ? <DisabledMagnifierIcon /> : <MagnifierIcon />}
       <Input
-        type="text"
+        type="search"
         value={content}
         placeholder="Search movies..."
         disabled={disabled}
         ref={inputRef}
+        autoFocus
         onChange={e => setContent(e.target.value)}
         onKeyDown={handleKeyDown}
       />
